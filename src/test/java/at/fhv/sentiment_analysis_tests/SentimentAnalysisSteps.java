@@ -10,8 +10,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
+import java.util.concurrent.TimeUnit;
+
+import static junit.framework.Assert.*;
 
 /**
  * Step implementation for the sentiment analysis UAT tests
@@ -26,7 +27,11 @@ public class SentimentAnalysisSteps {
      */
     @Before
     public void before() {
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Michael\\Desktop\\geckodriver.exe");
         driver = new FirefoxDriver();
+
+        // prevent errors if we start from a sleeping heroku instance
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     /**
@@ -46,14 +51,14 @@ public class SentimentAnalysisSteps {
     public void login(String email) {
         WebElement emailField = driver.findElement(By.id("email"));
         emailField.sendKeys(email);
-        emailField.submit();
+        driver.findElement(By.id("loginBtn")).click();
     }
 
     @When("^Analyze the test '(.*?)'$")
     public void analyzeText(String text) {
-        WebElement textField = driver.findElement(By.id("text"));
+        WebElement textField = driver.findElement(By.id("analyzeText"));
         textField.sendKeys(text);
-        textField.submit();
+        driver.findElement(By.id("analyzeBtn")).click();
     }
 
     @Then("^The smiley should be (.*?)$")
@@ -67,5 +72,12 @@ public class SentimentAnalysisSteps {
         } else {
             fail();
         }
+    }
+
+    @When("^I press logout$")
+    public void logout(){
+        driver.findElement(By.id("logoutLink")).click();
+        driver.findElement(By.id("logoutBtn")).click();
+        assertFalse(driver.findElements(By.id("logo")).isEmpty());
     }
 }

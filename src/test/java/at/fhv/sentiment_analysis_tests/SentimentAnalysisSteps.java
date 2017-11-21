@@ -94,10 +94,10 @@ public class SentimentAnalysisSteps {
     @Then("^The ([0-9]). row shows the history item with text '(.*?)' and sentiment is '(.*?)'")
     public void checkHistoryItem(int row, String text, String sentiment) {
         WebElement textCell = driver.findElement(By.xpath("//table/tbody/tr[" + row  + "]/td[1]"));
-        WebElement sentimentCell = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[2]"));
+        WebElement sentimentIcon = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[2]/i"));
 
         assertEquals(text, textCell.getText());
-        verifySentiment(sentimentCell, sentiment);
+        verifySentiment(sentimentIcon, sentiment);
     }
 
     /**

@@ -16,14 +16,14 @@
       <file leaf-file-name="SentimentAnalysisSteps.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/at/fhv/sentiment_analysis_tests/SentimentAnalysisSteps.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="582">
-              <caret line="103" column="88" lean-forward="false" selection-start-line="103" selection-start-column="88" selection-end-line="103" selection-end-column="88" />
+            <state relative-caret-position="-157">
+              <caret line="68" column="48" lean-forward="false" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2833#2834#0" expanded="true" />
-                <element signature="e#2906#2907#0" expanded="true" />
-                <element signature="e#2980#2981#0" expanded="true" />
-                <element signature="e#3046#3047#0" expanded="true" />
+                <element signature="e#2582#2583#0" expanded="true" />
+                <element signature="e#2655#2656#0" expanded="true" />
+                <element signature="e#2729#2730#0" expanded="true" />
+                <element signature="e#2795#2796#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -312,7 +312,7 @@
       <option name="presentableId" value="Default" />
       <updated>1511285841734</updated>
       <workItem from="1511285844536" duration="4715000" />
-      <workItem from="1511293467051" duration="3687000" />
+      <workItem from="1511293467051" duration="3845000" />
     </task>
     <servers />
   </component>
@@ -349,7 +349,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8402000" />
+    <option name="totallyTimeSpent" value="8560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -425,14 +425,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/at/fhv/sentiment_analysis_tests/SentimentAnalysisSteps.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="582">
-          <caret line="103" column="88" lean-forward="false" selection-start-line="103" selection-start-column="88" selection-end-line="103" selection-end-column="88" />
+        <state relative-caret-position="-157">
+          <caret line="68" column="48" lean-forward="false" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2833#2834#0" expanded="true" />
-            <element signature="e#2906#2907#0" expanded="true" />
-            <element signature="e#2980#2981#0" expanded="true" />
-            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#2582#2583#0" expanded="true" />
+            <element signature="e#2655#2656#0" expanded="true" />
+            <element signature="e#2729#2730#0" expanded="true" />
+            <element signature="e#2795#2796#0" expanded="true" />
           </folding>
         </state>
       </provider>

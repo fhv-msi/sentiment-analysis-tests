@@ -66,14 +66,7 @@ public class SentimentAnalysisSteps {
     @Then("^The smiley should be (.*?)$")
     public void checkSentiment(String sentiment) {
         WebElement sentimentItem = driver.findElement(By.id("sentiment"));
-        String classes = sentimentItem.getAttribute("class");
-        if ("happy".equals(sentiment)) {
-            assertTrue(classes.contains("smile"));
-        } else if ("unhappy".equals(sentiment)) {
-            assertTrue(classes.contains("frown"));
-        } else {
-            fail();
-        }
+        verifySentiment(sentimentItem, sentiment);
     }
 
     @When("^I press logout$")
@@ -104,7 +97,16 @@ public class SentimentAnalysisSteps {
         WebElement sentimentCell = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[2]"));
 
         assertEquals(text, textCell.getText());
-        String classes = sentimentCell.getAttribute("class");
+        verifySentiment(sentimentCell, sentiment);
+    }
+
+    /**
+     * Check if the given icon contains the given sentiment
+     * @param sentimentIcon The icon to check
+     * @param sentiment The sentiment which should be set in the icon
+     */
+    private void verifySentiment(WebElement sentimentIcon, String sentiment){
+        String classes = sentimentIcon.getAttribute("class");
         if ("happy".equals(sentiment)) {
             assertTrue(classes.contains("smile"));
         } else if ("unhappy".equals(sentiment)) {

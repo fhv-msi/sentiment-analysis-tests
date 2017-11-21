@@ -5,10 +5,11 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,9 +55,10 @@ public class SentimentAnalysisSteps {
         driver.findElement(By.id("loginBtn")).click();
     }
 
-    @When("^Analyze the test '(.*?)'$")
+    @When("^Analyze the text '(.*?)'$")
     public void analyzeText(String text) {
         WebElement textField = driver.findElement(By.id("analyzeText"));
+        textField.clear();
         textField.sendKeys(text);
         driver.findElement(By.id("analyzeBtn")).click();
     }
@@ -75,9 +77,40 @@ public class SentimentAnalysisSteps {
     }
 
     @When("^I press logout$")
-    public void logout(){
+    public void logout() {
         driver.findElement(By.id("logoutLink")).click();
-        driver.findElement(By.id("logoutBtn")).click();
+
+        // wait until popup is visible
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement logoutBtn = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("logoutBtn")));
+
+        logoutBtn.click();
+    }
+
+    @Then("^I see the login page$")
+    public void checkLoginPage() {
         assertFalse(driver.findElements(By.id("logo")).isEmpty());
+    }
+
+    @When("^Navigate to history$")
+    public void navigateToHistory() {
+        driver.findElement(By.linkText("History")).click();
+    }
+
+    @Then("^The ([0-9]). row shows the history item with text '(.*?)' and sentiment is '(.*?)'")
+    public void checkHistoryItem(int row, String text, String sentiment) {
+        WebElement textCell = driver.findElement(By.xpath("//table/tbody/tr[" + row  + "]/td[1]"));
+        WebElement sentimentCell = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[2]"));
+
+        assertEquals(text, textCell.getText());
+        String classes = sentimentCell.getAttribute("class");
+        if ("happy".equals(sentiment)) {
+            assertTrue(classes.contains("smile"));
+        } else if ("unhappy".equals(sentiment)) {
+            assertTrue(classes.contains("frown"));
+        } else {
+            fail();
+        }
     }
 }

@@ -5,12 +5,12 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
 
   Scenario: Test positive sentiment
     Given Login with user 'user@test.com'
-    When Analyze the test 'I love people'
+    When Analyze the text 'I love people'
     Then The smiley should be happy
 
   Scenario: Test negative sentiment
     Given Login with user 'user@test.com'
-    When Analyze the test 'I hate people'
+    When Analyze the text 'I hate people'
     Then The smiley should be unhappy
 
   Scenario: Test login and logout
@@ -20,8 +20,8 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
 
   Scenario: User interaction with history
     Given Login with user 'user@test.com'
-    When Analyze the test 'I love people'
-    And Analyze the test 'I hate people'
+    When Analyze the text 'I love people'
+    And Analyze the text 'I hate people'
     And Navigate to history
-    Then There is a history item with text 'I love people' and sentiment is happy
-    And There is a history item with text 'I hate people' and sentiment is unhappy
+    Then The 1. row shows the history item with text 'I love people' and sentiment is 'happy'
+    And The 2. row shows the history item with text 'I hate people' and sentiment is 'unhappy'

@@ -61,7 +61,8 @@ public class SentimentAnalysisSteps {
         textField.clear();
         textField.sendKeys(text);
 
-        WebDriverWait wait = new WebDriverWait(driver, 10);;
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        ;
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.id("analyzeBtn")));
         button.click();
 
@@ -79,13 +80,14 @@ public class SentimentAnalysisSteps {
 
     @When("^I press logout$")
     public void logout() {
-        driver.findElement(By.id("logoutLink")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement logoutLink = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("logoutLink")));
+        logoutLink.click();
 
         // wait until popup is visible
-        WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement logoutBtn = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("logoutBtn")));
-
+                ExpectedConditions.elementToBeClickable(By.id("logoutBtn")));
         logoutBtn.click();
     }
 

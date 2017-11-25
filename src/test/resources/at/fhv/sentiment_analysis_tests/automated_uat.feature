@@ -13,6 +13,11 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
     When Analyze the text 'I hate people'
     Then The smiley should be unhappy
 
+  Scenario: Test neutral sentiment
+    Given Login with user 'user@test.com'
+    When Analyze the text ''
+    Then The smiley should be neutral
+
   Scenario: Test login and logout
     Given Login with user 'user@test.com'
     When I press logout

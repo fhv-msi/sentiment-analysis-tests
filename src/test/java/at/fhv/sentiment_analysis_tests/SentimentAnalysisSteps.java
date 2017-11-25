@@ -60,11 +60,19 @@ public class SentimentAnalysisSteps {
         WebElement textField = driver.findElement(By.id("analyzeText"));
         textField.clear();
         textField.sendKeys(text);
-        driver.findElement(By.id("analyzeBtn")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, 10);;
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.id("analyzeBtn")));
+        button.click();
+
     }
 
     @Then("^The smiley should be (.*?)$")
+    // wait until the result has been received
     public void checkSentiment(String sentiment) {
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("analyzeBtn")));
+
         WebElement sentimentItem = driver.findElement(By.id("sentiment"));
         verifySentiment(sentimentItem, sentiment);
     }
@@ -93,7 +101,7 @@ public class SentimentAnalysisSteps {
 
     @Then("^The ([0-9]). row shows the history item with text '(.*?)' and sentiment is '(.*?)'")
     public void checkHistoryItem(int row, String text, String sentiment) {
-        WebElement textCell = driver.findElement(By.xpath("//table/tbody/tr[" + row  + "]/td[1]"));
+        WebElement textCell = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[1]"));
         WebElement sentimentIcon = driver.findElement(By.xpath("//table/tbody/tr[" + row + "]/td[2]/i"));
 
         assertEquals(text, textCell.getText());
@@ -102,15 +110,18 @@ public class SentimentAnalysisSteps {
 
     /**
      * Check if the given icon contains the given sentiment
+     *
      * @param sentimentIcon The icon to check
-     * @param sentiment The sentiment which should be set in the icon
+     * @param sentiment     The sentiment which should be set in the icon
      */
-    private void verifySentiment(WebElement sentimentIcon, String sentiment){
+    private void verifySentiment(WebElement sentimentIcon, String sentiment) {
         String classes = sentimentIcon.getAttribute("class");
         if ("happy".equals(sentiment)) {
             assertTrue(classes.contains("smile"));
         } else if ("unhappy".equals(sentiment)) {
             assertTrue(classes.contains("frown"));
+        } else if ("neutral".equals(sentiment)) {
+            assertTrue(classes.contains("meh"));
         } else {
             fail();
         }

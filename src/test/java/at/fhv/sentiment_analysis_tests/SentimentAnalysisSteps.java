@@ -7,9 +7,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static junit.framework.Assert.*;
@@ -26,8 +29,16 @@ public class SentimentAnalysisSteps {
      * with the path to the geckodriver binary
      */
     @Before
-    public void before() {
-        driver = new FirefoxDriver();
+    public void before() throws Exception {
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("version", "latest");
+        capabilities.setCapability("platform", Platform.LINUX);
+        capabilities.setCapability("name", "Automated User Acceptance Tests");
+
+        driver = new RemoteWebDriver(
+                new URL("http://"+System.getenv("TESTINGBOT_CREDENTIALS")+"@hub.testingbot.com/wd/hub"),
+                capabilities);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         // prevent errors if we start from a sleeping heroku instance
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

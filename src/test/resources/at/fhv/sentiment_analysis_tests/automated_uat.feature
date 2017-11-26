@@ -3,6 +3,11 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
   Background:
     Given Open https://fhv-frontend-staging.herokuapp.com/
 
+  Scenario: Test login and logout
+    Given Login with user 'user@test.com'
+    When I press logout
+    Then I see the login page
+    
   Scenario: Test positive sentiment
     Given Login with user 'user@test.com'
     When Analyze the text 'I love people'
@@ -20,11 +25,6 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
     When Analyze the text ''
     Then The smiley should be neutral
     And I press logout
-
-  Scenario: Test login and logout
-    Given Login with user 'user@test.com'
-    When I press logout
-    Then I see the login page
 
   Scenario: User interaction with history
     Given Login with user 'user@test.com'

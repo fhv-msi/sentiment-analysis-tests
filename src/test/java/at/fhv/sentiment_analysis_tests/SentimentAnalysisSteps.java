@@ -1,5 +1,6 @@
 package at.fhv.sentiment_analysis_tests;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -29,16 +30,15 @@ public class SentimentAnalysisSteps {
      * with the path to the geckodriver binary
      */
     @Before
-    public void before() throws Exception {
+    public void before(Scenario scenario) throws Exception {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("version", "latest");
         capabilities.setCapability("platform", Platform.LINUX);
-        capabilities.setCapability("name", "Automated User Acceptance Tests");
+        capabilities.setCapability("name", scenario.getName());
 
         driver = new RemoteWebDriver(
                 new URL("http://"+System.getenv("TESTINGBOT_CREDENTIALS")+"@hub.testingbot.com/wd/hub"),
                 capabilities);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         // prevent errors if we start from a sleeping heroku instance
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);

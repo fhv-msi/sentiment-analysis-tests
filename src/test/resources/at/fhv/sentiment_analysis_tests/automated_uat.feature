@@ -7,7 +7,7 @@ Feature: Automated User Acceptance Tests for the Sentiment Analysis Application
     Given Login with user 'user@test.com'
     When I press logout
     Then I see the login page
-    
+
   Scenario: Test positive sentiment
     Given Login with user 'user@test.com'
     When Analyze the text 'I love people'

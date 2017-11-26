@@ -7,7 +7,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -28,7 +27,6 @@ public class SentimentAnalysisSteps {
      */
     @Before
     public void before() {
-        System.setProperty("webdriver.gecko.driver", "C:\\Users\\Michael\\Desktop\\geckodriver.exe");
         driver = new FirefoxDriver();
 
         // prevent errors if we start from a sleeping heroku instance

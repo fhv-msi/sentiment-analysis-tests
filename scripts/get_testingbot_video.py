@@ -1,3 +1,4 @@
+#!/opt/pyenv/shims/python
 import json, sys, urllib, os;
 
 url = "https://" + os.environ['TESTINGBOT_CREDENTIALS'] + "@api.testingbot.com/v1/tests?count=10?skip_fields=logs,thumbs,steps"

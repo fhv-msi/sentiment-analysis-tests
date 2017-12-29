@@ -14,7 +14,7 @@ for i in range(0, 10):
         if test['name'] == 'User interaction with history' and test['state'] == 'COMPLETE':
             if not test['assets_available']:
                 # wait 5 seconds if the asset is not available and try again
-                time.wait(5)
+                time.sleep(5)
                 break
 
             print test['video']
